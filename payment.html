@@ -72,14 +72,14 @@
             
             <h2 class="text-2xl font-black mt-8 mb-3 uppercase tracking-tight">Activate Account</h2>
             <p class="text-gray-400 text-[10px] leading-relaxed px-2">
-                Transfer to the secured vault below for <span id="country-name-label" class="text-white font-bold">Nigeria</span> to complete your Account ACTIVATION.
+                Transfer to the secured vault below for <span id="country-name-label" class="text-white font-bold">...</span> to complete your Account ACTIVATION.
             </p>
         </div>
 
         <div class="plan-box">
-            <div class="plan-option text-center"><span>EURO LITE</span><div id="lite-price">₦8,500</div></div>
+            <div class="plan-option text-center"><span>EURO LITE</span><div id="lite-price">...</div></div>
             <div style="width: 1px; background: rgba(255,255,255,0.1);"></div>
-            <div class="plan-option text-center"><span>EURO MAX</span><div id="max-price">₦14,500</div></div>
+            <div class="plan-option text-center"><span>EURO MAX</span><div id="max-price">...</div></div>
         </div>
 
         <div class="bank-details-wrapper" onclick="copyNum()">
@@ -89,12 +89,12 @@
             
             <div class="mb-5">
                 <p class="text-[9px] text-gray-500 uppercase font-black tracking-wider mb-1">Financial Institution</p>
-                <p id="bank-name-display" class="text-lg font-bold tracking-tight">KUDA MfB</p>
+                <p id="bank-name-display" class="text-lg font-bold tracking-tight">...</p>
             </div>
 
             <div class="mb-5">
                 <p class="text-[9px] text-gray-500 uppercase font-black tracking-wider mb-1">Account Number / ID</p>
-                <p id="db-number" class="account-number-text">3003425249</p>
+                <p id="db-number" class="account-number-text">...</p>
                 <div class="flex items-center gap-2">
                     <span class="text-[8px] bg-green-500/10 text-green-500 px-2 py-0.5 rounded font-black uppercase">Click to copy</span>
                 </div>
@@ -102,7 +102,7 @@
 
             <div>
                 <p class="text-[9px] text-gray-500 uppercase font-black tracking-wider mb-1">Account Holder Name</p>
-                <p id="account-name-display" class="text-[13px] font-bold leading-tight uppercase text-gray-200">MORRISH M ENTERPRISES</p>
+                <p id="account-name-display" class="text-[13px] font-bold leading-tight uppercase text-gray-200">...</p>
             </div>
         </div>
 
@@ -129,6 +129,7 @@
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+    // YOUR FIREBASE CONFIG
     const firebaseConfig = {
         apiKey: "AIzaSyASDlQQMoXCeMZKs5O3KmO8zuFztt8rg2E",
         authDomain: "celeste-web1.firebaseapp.com",
@@ -142,33 +143,28 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    // MAPPING DATA
     const countryData = {
         "nigeria": { name: "Nigeria", bank: "Kuda Mfb", number: "3003425249", holder: "MORRISH M ENTERPRISES", lite: "₦8,500", max: "₦14,500" },
-        "southafrica": { name: "South Africa", bank: "STANDARD BANK", number: "10247413028", holder: "E K Dlamini", lite: "R260", max: "R380" },
-        "kenya": { name: "Kenya", bank: "MPESA", number: "0702552808", holder: "Rose Cherono", lite: "1900 KSH", max: "2800 KSH" },
-        "zambia": { name: "Zambia", bank: "MTN Mobile Money", number: "0764496891", holder: "Bernard Chiyoba", lite: "420 ZMW", max: "600 ZMW" },
-        "rwanda": { name: "Rwanda", bank: "MTN Mobile money", number: "0799330824", holder: "Ahorukomeye Benoit", lite: "20,000 RWF", max: "35,000 RWF" },
-        "zimbabwe": { name: "Zimbabwe", bank: "ECO CASH", number: "0771623882", holder: "Nomsa Tsopo", lite: "$25", max: "$30" },
         "ghana": { name: "Ghana", bank: "MTN Mobile Money", number: "0534010225", holder: "Anthony Nakwah", lite: "170 GHS", max: "250 GHS" },
         "cameroon": { name: "Cameroon", bank: "MTN Mobile money", number: "670312294", holder: "MARGARET NUYIN", lite: "8,000 XAF", max: "14,000 XAF" },
         "sierraleone": { name: "Sierra Leone", bank: "ORANGE MOBILE MONEY", number: "073840776", holder: "Ibrahim Kofian Sesay", lite: "260 SLE", max: "380 SLE" },
-        "liberia": { name: "Liberia", bank: "MTN Mobile Money", number: "0555378341", holder: "Arthur Tidoe", lite: "LRD 3,000", max: "LRD 4,000" },
-        "botswana": { name: "Botswana", bank: "FNB Botswana", number: "Awaiting update", holder: "Celeste Vendor", lite: "180 BWP", max: "250 BWP" }
+        "southafrica": { name: "South Africa", bank: "STANDARD BANK", number: "10247413028", holder: "E K Dlamini", lite: "R260", max: "R380" },
+        "kenya": { name: "Kenya", bank: "MPESA", number: "0702552808", holder: "Rose Cherono", lite: "1900 KSH", max: "2800 KSH" },
+        "zambia": { name: "Zambia", bank: "MTN Mobile Money", number: "0764496891", holder: "Bernard Chiyoba", lite: "420 ZMW", max: "600 ZMW" },
+        "zimbabwe": { name: "Zimbabwe", bank: "ECO CASH", number: "0771623882", holder: "Nomsa Tsopo", lite: "$25", max: "$30" },
+        "rwanda": { name: "Rwanda", bank: "MTN Mobile money", number: "0799330824", holder: "Ahorukomeye Benoit", lite: "20,000 RWF", max: "35,000 RWF" },
+        "liberia": { name: "Liberia", bank: "MTN Mobile Money", number: "0555378341", holder: "Arthur Tidoe", lite: "LRD 3,000", max: "LRD 4,000" }
     };
 
     let vendorLink = "https://t.me/morrishmedia";
 
-    async function initPage() {
-        await signInAnonymously(auth);
-        
-        onSnapshot(doc(db, "configs/main"), (snap) => {
-            if(snap.exists()) vendorLink = snap.data().telegramLink || vendorLink;
-        });
-
+    // EXECUTION LOGIC
+    function setupUI() {
         const selected = localStorage.getItem('selectedCountry') || 'nigeria';
         const data = countryData[selected];
 
-        if(data) {
+        if (data) {
             document.getElementById('country-name-label').innerText = data.name;
             document.getElementById('bank-name-display').innerText = data.bank;
             document.getElementById('db-number').innerText = data.number;
@@ -178,8 +174,22 @@
         }
     }
 
-    initPage();
+    async function initPage() {
+        setupUI(); // Load data from localstorage first
+        
+        try {
+            await signInAnonymously(auth);
+            onSnapshot(doc(db, "configs/main"), (snap) => {
+                if(snap.exists()) {
+                    vendorLink = snap.data().telegramLink || vendorLink;
+                }
+            });
+        } catch(e) { console.log("Cloud link error - using default"); }
+    }
 
+    window.onload = initPage;
+
+    // GLOBAL FUNCTIONS
     window.copyNum = () => {
         const n = document.getElementById('db-number').innerText;
         const el = document.createElement('textarea');
@@ -192,63 +202,52 @@
 
     window.confirmPayment = () => {
         document.getElementById('overlay').style.display = 'flex';
-        const msg = encodeURIComponent("Hello Celeste Vendor, I have made payment for my account activation please confirm my payment");
+        const msg = encodeURIComponent("Hello Celeste Vendor, I have made payment for my account activation. Please confirm my payment.");
         const finalUrl = `${vendorLink}?text=${msg}`;
         setTimeout(() => { window.location.href = finalUrl; }, 3000);
     };
 
+    // TIMER
     let sec = 600;
     setInterval(() => {
         if(sec <= 0) return; sec--;
         const mins = Math.floor(sec/60);
         const s = (sec%60).toString().padStart(2,'0');
-        document.getElementById('timer').innerText = `${mins}:${s}`;
+        const tEl = document.getElementById('timer');
+        if(tEl) tEl.innerText = `${mins}:${s}`;
     }, 1000);
 
+    // NOTIFICATIONS
     const activities = [
         { name: "Chisom O.", type: "payment", amt: "₦14,500 (MAX)", loc: "Nigeria", icon: "fa-shield-check" },
         { name: "Kojo A.", type: "payment", amt: "170 GHS (LITE)", loc: "Ghana", icon: "fa-shield-check" },
         { name: "Zanele M.", type: "withdrawal", amt: "R4,200", loc: "South Africa", icon: "fa-wallet" },
         { name: "Bernard C.", type: "payment", amt: "600 ZMW (MAX)", loc: "Zambia", icon: "fa-shield-check" },
         { name: "Ibrahim S.", type: "withdrawal", amt: "3,500 SLE", loc: "Sierra Leone", icon: "fa-wallet" },
-        { name: "Rose C.", type: "payment", amt: "2800 KSH (MAX)", loc: "Kenya", icon: "fa-shield-check" },
-        { name: "Tunde W.", type: "withdrawal", amt: "₦120,000", loc: "Nigeria", icon: "fa-wallet" },
-        { name: "Ahorukomeye B.", type: "payment", amt: "35,000 RWF (MAX)", loc: "Rwanda", icon: "fa-shield-check" },
-        { name: "Nomsa T.", type: "payment", amt: "$30 (MAX)", loc: "Zimbabwe", icon: "fa-shield-check" },
-        { name: "Arthur T.", type: "withdrawal", amt: "LRD 12,000", loc: "Liberia", icon: "fa-wallet" },
-        { name: "Margaret N.", type: "payment", amt: "14,000 XAF (MAX)", loc: "Cameroon", icon: "fa-shield-check" },
-        { name: "Lerato K.", type: "withdrawal", amt: "R8,900", loc: "South Africa", icon: "fa-wallet" },
-        { name: "Kwesi B.", type: "payment", amt: "250 GHS (MAX)", loc: "Ghana", icon: "fa-shield-check" },
-        { name: "Musa G.", type: "withdrawal", amt: "₦45,000", loc: "Nigeria", icon: "fa-wallet" },
-        { name: "Farai M.", type: "withdrawal", amt: "$450", loc: "Zimbabwe", icon: "fa-wallet" }
+        { name: "Rose C.", type: "payment", amt: "2800 KSH (MAX)", loc: "Kenya", icon: "fa-shield-check" }
     ];
 
     let cur = 0;
     setInterval(() => {
         const item = activities[cur];
-        const iconEl = document.getElementById('activity-icon');
-        const textEl = document.getElementById('activity-text');
-        const subEl = document.getElementById('activity-sub');
-        const tagEl = document.getElementById('activity-tag');
+        const popup = document.getElementById('activity-popup');
+        if(!popup) return;
         
-        iconEl.innerHTML = `<i class="fas ${item.icon}"></i>`;
-        iconEl.style.color = item.type === 'payment' ? '#00ff40' : '#3b82f6';
-        iconEl.style.background = item.type === 'payment' ? 'rgba(0, 255, 64, 0.1)' : 'rgba(59, 130, 246, 0.1)';
+        document.getElementById('activity-icon').innerHTML = `<i class="fas ${item.icon}"></i>`;
+        document.getElementById('activity-text').innerText = `${item.name} ${item.type === 'payment' ? 'Activated' : 'Withdrew'} ${item.amt}`;
+        document.getElementById('activity-sub').innerText = `${item.loc} • Just now`;
         
-        textEl.innerText = `${item.name} ${item.type === 'payment' ? 'Activated' : 'Withdrew'} ${item.amt}`;
-        subEl.innerText = `${item.loc} • Just now`;
-        
-        tagEl.innerText = item.type === 'payment' ? 'SECURED' : 'PAID OUT';
-        tagEl.className = item.type === 'payment' ? 
+        const tag = document.getElementById('activity-tag');
+        tag.innerText = item.type === 'payment' ? 'SECURED' : 'PAID OUT';
+        tag.className = item.type === 'payment' ? 
             'text-[8px] px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 ml-2 font-black uppercase' : 
             'text-[8px] px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-500 ml-2 font-black uppercase';
         
-        document.getElementById('activity-popup').classList.add('show');
-        setTimeout(() => document.getElementById('activity-popup').classList.remove('show'), 3800);
+        popup.classList.add('show');
+        setTimeout(() => popup.classList.remove('show'), 3800);
         cur = (cur + 1) % activities.length;
     }, 7000);
 </script>
 </body>
 </html>
-
 
