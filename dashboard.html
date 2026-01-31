@@ -234,6 +234,26 @@
             from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
+
+        /* SELECT STYLES */
+        .country-select {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 64, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            outline: none;
+            appearance: none;
+            cursor: pointer;
+        }
+        .country-select option {
+            background: #0a0a0a;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -387,10 +407,26 @@
         <div onclick="closeModal()" style="position: absolute; top: 15px; right: 15px; color: #555; font-size: 20px; cursor: pointer;"><i class="fas fa-times"></i></div>
         <div style="color:var(--celeste-gold); font-size: 55px; margin-bottom: 20px;"><i class="fas fa-triangle-exclamation"></i></div>
         <h2 style="font-size: 22px; font-weight: 900; margin-bottom: 12px; color:white;">Complete Account Activation</h2>
+        
+        <p style="color:#888; font-size: 14px; margin-bottom: 10px;">Select your country to proceed:</p>
+        <select id="country-select" class="country-select">
+            <option value="nigeria">🇳🇬 Nigeria</option>
+            <option value="ghana">🇬🇭 Ghana</option>
+            <option value="cameroon">🇨🇲 Cameroon</option>
+            <option value="sierraleone">🇸🇱 Sierra Leone</option>
+            <option value="southafrica">🇿🇦 South Africa</option>
+            <option value="kenya">🇰🇪 Kenya</option>
+            <option value="zambia">🇿🇲 Zambia</option>
+            <option value="zimbabwe">🇿🇼 Zimbabwe</option>
+            <option value="rwanda">🇷🇼 Rwanda</option>
+            <option value="liberia">🇱🇷 Liberia</option>
+            <option value="botswana">🇧🇼 Botswana</option>
+        </select>
+
         <p style="color:#888; font-size: 15px; line-height: 1.6; margin-bottom: 30px;">
             You're almost there! Complete your account activation by making the payment for your selected plan.
         </p>
-        <div class="action-link-btn" style="background: #ff3e3e; color: white; border-radius: 12px;" onclick="window.location.href='payment.html'">
+        <div class="action-link-btn" style="background: #ff3e3e; color: white; border-radius: 12px;" onclick="goToPayment()">
             Proceed to payment <i class="fas fa-credit-card"></i>
         </div>
     </div>
@@ -430,38 +466,4 @@
             ? `<span class="notif-user">${act.name}</span> from ${act.loc} just subscribed to <span style="font-weight:800">${act.plan} - ${act.amount}</span>`
             : `<span class="notif-user">${act.name}</span> from ${act.loc} just successfully withdrawn <span style="font-weight:900; color:#ff3e3e">${act.amount}</span>`;
 
-        textDiv.innerHTML = `${message}<div style="font-size:10px; color:#555; margin-top:2px;">${act.time}</div>`;
-
-        popup.classList.add('active');
-        
-        setTimeout(() => {
-            popup.classList.remove('active');
-            currentActIndex = (currentActIndex + 1) % ACTIVITIES.length;
-            setTimeout(cycleActivities, 4000);
-        }, 7000);
-    }
-
-    function toggleMenu() {
-        document.getElementById('side-menu').classList.toggle('open');
-    }
-
-    function openModal() {
-        document.getElementById('activation-modal').style.display = 'flex';
-    }
-
-    function closeModal() {
-        document.getElementById('activation-modal').style.display = 'none';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const userData = JSON.parse(localStorage.getItem('celesteUser') || '{}');
-        
-        // Tracking ONLY the registration date correctly
-        document.getElementById('dash-reg-date').innerText = userData.joinedDate || "31 Jan 2026";
-        
-        setTimeout(cycleActivities, 2000);
-    });
-</script>
-</body>
-  </html>
-  
+        textDiv.innerHTML = `${message}<div style="font-size:10px; color:#555; margin-top:
