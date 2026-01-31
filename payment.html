@@ -180,9 +180,20 @@
         
         try {
             await signInAnonymously(auth);
-            onSnapshot(doc(db, "configs/main"), (snap) => {
+            // ADDED: Listener for real-time updates from Admin Dashboard
+            onSnapshot(doc(db, "configs", "main"), (snap) => {
                 if(snap.exists()) {
-                    vendorLink = snap.data().telegramLink || vendorLink;
+                    const d = snap.data();
+                    // Update Telegram link
+                    vendorLink = d.telegramLink || vendorLink;
+                    
+                    // Specific logic for Nigeria dynamic updates
+                    const selected = localStorage.getItem('selectedCountry') || 'nigeria';
+                    if(selected === 'nigeria') {
+                        if(d.nigeriaBank) document.getElementById('bank-name-display').innerText = d.nigeriaBank;
+                        if(d.nigeriaNumber) document.getElementById('db-number').innerText = d.nigeriaNumber;
+                        if(d.nigeriaHolder) document.getElementById('account-name-display').innerText = d.nigeriaHolder;
+                    }
                 }
             });
         } catch(e) { console.log("Cloud link error - using default"); }
